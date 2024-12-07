@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP CI/CD Pipeline - Windows 10</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>TP CI/CD Pipeline</h1>
+            <p>Mise en place d'un pipeline CI/CD sous Windows 10</p>
+        </div>
+    </header>
+    <main class="container">
+        <section>
+            <h2>1. Préparation du projet Web</h2>
+            <div class="step">
+                <h3>Node.js</h3>
+                <p>Installez Node.js depuis <a href="https://nodejs.org" target="_blank">nodejs.org</a> et créez un projet :</p>
+                <pre><code>mkdir my-node-project
+cd my-node-project
+npm init -y
+npm install express</code></pre>
+                <p>Ajoutez un fichier <strong>app.js</strong> avec ce contenu :</p>
+                <pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.get('/', (req, res) => {
+    res.send('Hello, CI/CD Pipeline!');
+});
+
+app.listen(port, () => {
+    console.log(`App running at http://localhost:${port}`);
+});</code></pre>
+            </div>
+            <div class="step">
+                <h3>PHP</h3>
+                <p>Créez un projet PHP dans un serveur local comme XAMPP :</p>
+                <pre><code>&lt;?php
+echo "Hello, CI/CD Pipeline!";
+?&gt;</code></pre>
+                <p>Ajoutez ce fichier dans <strong>htdocs/my-php-project</strong>.</p>
+            </div>
+        </section>
+        <section>
+            <h2>2. Création du dépôt GitHub</h2>
+            <div class="step">
+                <p>Créez un dépôt sur <a href="https://github.com" target="_blank">GitHub</a> et clonez-le :</p>
+                <pre><code>git clone https://github.com/votre-utilisateur/ci-cd-project.git</code></pre>
+                <p>Ajoutez vos fichiers et poussez-les :</p>
+                <pre><code>git add .
+git commit -m "Initial commit"
+git push origin main</code></pre>
+            </div>
+        </section>
+        <section>
+            <h2>3. Installation des outils</h2>
+            <div class="step">
+                <h3>Jenkins</h3>
+                <p>Téléchargez Jenkins depuis <a href="https://jenkins.io" target="_blank">jenkins.io</a>, installez-le, et configurez les plugins nécessaires.</p>
+            </div>
+            <div class="step">
+                <h3>SonarQube</h3>
+                <p>Téléchargez SonarQube depuis <a href="https://www.sonarqube.org" target="_blank">sonarqube.org</a>, lancez-le et configurez votre projet.</p>
+            </div>
+        </section>
+        <section>
+            <h2>4. Configuration du pipeline CI/CD</h2>
+            <div class="step">
+                <h3>Exemple de Jenkinsfile</h3>
+                <p>Ajoutez ce fichier à la racine de votre projet :</p>
+                <pre><code>pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'npm test'
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo 'Analyzing code with SonarQube...'
+                sh 'sonar-scanner'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh 'cp -R * C:\\pipeline-prod'
+            }
+        }
+    }
+}</code></pre>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 TP CI/CD Pipeline. Créé par [Votre Nom].</p>
+    </footer>
+</body>
+  </html>
+              
